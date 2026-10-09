@@ -18,27 +18,19 @@ Reads are marked read-only. Tools that change data are marked as destructive, so
 
 ## Cursor
 
-1. In HellouOne, go to **Settings → Integrations → AI clients (MCP)** and create a personal token. You need to be an administrator. Only if the assistant should be able to make changes, tick **Allow this client to make changes** on the token and turn on **Allow changes** for the account on the same page.
-2. Export it where Cursor runs:
+Install it from the Cursor Marketplace or [cursor.directory](https://cursor.directory/plugins/hellouone), or add the server yourself to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
 
-   ```bash
-   export HELLOUONE_MCP_TOKEN=hcm_...
-   ```
+```json
+{
+  "mcpServers": {
+    "hellouone": { "url": "https://mcp.hellou.ai/mcp" }
+  }
+}
+```
 
-3. Add the server to `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
+On first use Cursor opens HellouOne's sign-in page in your browser. An administrator picks the account and decides whether the assistant may make changes, then Cursor takes the connection back. There's no token to create or paste. Disconnect it any time in **Settings → Integrations → AI clients (MCP)**.
 
-   ```json
-   {
-     "mcpServers": {
-       "hellouone": {
-         "url": "https://mcp.hellou.ai/mcp",
-         "headers": { "Authorization": "Bearer ${env:HELLOUONE_MCP_TOKEN}" }
-       }
-     }
-   }
-   ```
-
-Keep the token out of chat, logs and committed files.
+Prefer a personal token (for example on a machine without a browser)? Create one on that same settings page and add `"headers": { "Authorization": "Bearer ${env:HELLOUONE_MCP_TOKEN}" }` to the entry above, with the token exported as `HELLOUONE_MCP_TOKEN`. Keep it out of chat, logs and committed files.
 
 ## Other clients
 
@@ -59,7 +51,7 @@ HellouOne es una plataforma omnicanal de atención al cliente (WhatsApp, chat we
 - consulte reportes de conversaciones, agentes y equipos;
 - si un administrador lo permite, haga cambios como crear etiquetas o respuestas rápidas.
 
-**En Cursor:** crea un token personal en **Configuración → Integraciones → Clientes de IA (MCP)**, expórtalo como `HELLOUONE_MCP_TOKEN` y usa la configuración de arriba. **En claude.ai y ChatGPT:** agrega `https://mcp.hellou.ai/mcp` como conector personalizado e inicia sesión. Un administrador elige la cuenta y decide si el asistente puede hacer cambios. Cada cambio queda en el registro de auditoría de la cuenta.
+**En Cursor:** instálalo desde el Marketplace de Cursor o agrega el servidor solo con su URL (configuración de arriba). La primera vez, Cursor abre la página de inicio de sesión de HellouOne y no necesitas token. **En claude.ai y ChatGPT:** agrega `https://mcp.hellou.ai/mcp` como conector personalizado e inicia sesión. Un administrador elige la cuenta y decide si el asistente puede hacer cambios. Cada cambio queda en el registro de auditoría de la cuenta.
 
 Documentación: https://one.hellou.ai/docs/es/mcp.html
 
