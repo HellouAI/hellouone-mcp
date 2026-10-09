@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "hellouone": {
+      "url": "https://mcp.hellou.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:HELLOUONE_MCP_TOKEN}"
+      }
+    }
+  }
+}
